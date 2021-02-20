@@ -185,11 +185,11 @@ void printResult(Students *students, int studentQuantity, bool printMedian){
         }
         else{
             double avg = 0;
-            for(int gradeIndx=0; gradeIndx < students[i].homeworkQuant; gradeIndx++){
+            for(int gradeIndx=0; gradeIndx < students[i].homeworkQuant-1; gradeIndx++){
                 avg += students[i].grades[gradeIndx];
             }
-            avg = avg/students[i].homeworkQuant;
-            finalGrade = avg;
+            avg = avg/(students[i].homeworkQuant-1);
+            finalGrade = avg*0.4 + students[i].grades[students[i].homeworkQuant-1]*0.6;
         }
         cout << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << finalGrade << endl;
     }
