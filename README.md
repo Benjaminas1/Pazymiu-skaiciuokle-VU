@@ -11,7 +11,7 @@ Taip pat yra galimybe, kad pažymiai būtų sugeneruojami atsitiktiniu būdu
 
 Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arba medianą.
 
-# Programos veikimo pavyzdys
+# Programos veikimo pavyzdys naudojant rankinę įvestį
  
       Iveskite studento varda ir pavarde: Vaidotas Girinis
       Ar zinomas namu darbu kiekis? (T/N): T
@@ -43,3 +43,15 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
       Vaidotas       Girinis        9.07
       Benjaminas     Racas          7.71
       Vytautas       Miltinis       8.80
+
+# Programos veikimo pavyzdys naudojant nuskaitymą iš failo
+      Ar norite kad duomenys butu nuskaityti is failo? (T/N): T
+      Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): 1
+      Vardas         Pavarde        Galutinis (Vid.)
+      ----------------------------------------------
+      Vardas1        Pavarde1       3.88
+      Vardas2        Pavarde2       6.15
+      Vardas3        Pavarde3       5.59
+      Vardas4        Pavarde4       3.19
+      
+      
