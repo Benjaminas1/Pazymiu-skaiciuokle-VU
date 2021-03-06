@@ -55,3 +55,6 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
       Vardas4        Pavarde4       3.19
       
       
+# V0.3 versijos kompiliavimas:
+      g++ -c main.cpp functions.cpp students.cpp
+      g++ -o main main.o functions.o students.o
