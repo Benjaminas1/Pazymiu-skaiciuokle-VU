@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -59,16 +61,6 @@ void isGrade(int &grade){
         grade = numberInput();
     }
 }
-
-// void expandArray(int *array, int &size){
-//     int* newArr = new int[size+1];
-//     for(int i=0; i<size; i++){
-//         newArr[i] = array[i];
-//     }
-//     delete[] array;
-//     array = newArr;
-//     size+=1;
-// }
 
 void examResult(Students &student){
     cout << "Iveskite egzamino rezultata: ";
@@ -160,14 +152,19 @@ void submitStudent(Students student, Students *&students, int &studentQuantity){
     students[studentQuantity-1] = student;
 }
 
-void printResult(Students *students, int studentQuantity, bool printMedian){
+void printResult(Students *students, int studentQuantity, bool printMedian, bool offstream){
 
     double finalGrade = 0;
     string finalType = "";
     finalType = printMedian ? "(Med.)" : "(Vid.)";
-    
-    cout << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
 
+    ofstream out("rez.txt");
+
+    if(offstream){
+        out << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
+    } 
+    else cout << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
+    
     for(int i=0; i<studentQuantity; i++){
         finalGrade = 0;
         if(printMedian){
@@ -191,38 +188,127 @@ void printResult(Students *students, int studentQuantity, bool printMedian){
             avg = avg/(students[i].homeworkQuant-1);
             finalGrade = avg*0.4 + students[i].grades[students[i].homeworkQuant-1]*0.6;
         }
-        cout << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << finalGrade << endl;
+
+        if(offstream){
+            out << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << finalGrade << endl;
+        }
+        else cout << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << finalGrade << endl;
+
     }
 }
 
+// void printStudent(Students student, bool printMedian){
+
+//     ofstream out("")
+
+//     double finalGrade = 0;
+//     string finalType = "";
+//     finalType = printMedian ? "(Med.)" : "(Vid.)";
+    
+//     cout << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
+
+//         finalGrade = 0;
+//         if(printMedian){
+//             int midIndex = (student.homeworkQuant/2)-1;
+//             //sort(students[i].grades, students[i].grades + students[i].homeworkQuant);
+//             sort(student.grades.begin(), student.grades.end()); 
+
+//             if(student.homeworkQuant % 2 == 0){
+            
+//                 finalGrade = 1.00 * (student.grades[midIndex] + student.grades[midIndex+1]) / 2;
+//             }
+//             else{
+//                 finalGrade = student.grades[midIndex];
+//             }
+//         }
+//         else{
+//             double avg = 0;
+//             for(int gradeIndx=0; gradeIndx < student.homeworkQuant-1; gradeIndx++){
+//                 avg += student.grades[gradeIndx];
+//             }
+//             avg = avg/(student.homeworkQuant-1);
+//             finalGrade = avg*0.4 + student.grades[student.homeworkQuant-1]*0.6;
+//         }
+//         cout << left << setw(15) << student.name << left << setw(15) << student.surname << left << setw(15) << setprecision(2) << fixed << finalGrade << endl;
+
+// }
+
+int wordCount(string str){
+    int wc = 1;
+
+    for(int i=0; i<str.length(); i++){
+        if(i >= 1 && !isspace(str[i]) && isspace(str[i-1])) wc++;
+    }
+
+    return wc;
+}
+
+bool comepareTwoStudents(Students a, Students b){
+    if(a.name<b.name) return true;
+    else return false;
+}
+
 int main(){
-    ifstream in("duom.txt");
+    ifstream in("duomenys.txt");
+    ofstream out("rez.txt");
 
     int studentQuantity = 0;
     Students* students = new Students[studentQuantity];
 
-    Students student;
+    //Students student;
 
-    newStudent(student);
-    submitStudent(student, students, studentQuantity);
+    cout << "Ar norite kad duomenys butu nuskaityti is failo? (T/N): ";
+    if(confirm()){
+        string firstLine;
+        getline(in, firstLine);
+        int homeworkCount = wordCount(firstLine) - 2;
 
-    bool confirmation = true;
-    while(confirmation){
-        cout << "Ar norite prideti dar viena moksleivi? (T/N): ";
-        confirmation = confirm();
-        if(confirmation){
+        // bool printMedian = confirm();
+
+        students = new Students[1000000];
+
+        while(true){
             Students student;
-            //expandArray(student.grades, studentQuantity);
-            newStudent(student);
-            submitStudent(student, students, studentQuantity);
+            student.homeworkQuant = homeworkCount;
+            student.grades.resize(homeworkCount);
+            in >> student.name >> student.surname;
+
+            student.grades.resize(homeworkCount);
+            for(int i=0; i<student.homeworkQuant; i++){
+                in >> student.grades[i];
+            }
+            
+            students[studentQuantity] = student;
+            studentQuantity++;
+            
+            if(in.eof()) break;
+        }
+    }
+    else{
+        Students student;
+        newStudent(student);
+        submitStudent(student, students, studentQuantity);
+
+        bool confirmation = true;
+        while(confirmation){
+            cout << "Ar norite prideti dar viena moksleivi? (T/N): ";
+            confirmation = confirm();
+            if(confirmation){
+                Students student;
+                //expandArray(student.grades, studentQuantity);
+                newStudent(student);
+                submitStudent(student, students, studentQuantity);
+            }
         }
     }
 
-    //cout << students[0].name << " " << students[1].name << endl;
     
+
+    //cout << students[0].name << " " << students[1].name << endl;
+    sort(students, students + studentQuantity, comepareTwoStudents);
 
     cout << "Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): ";
     bool printMedian = optionInput();
 
-    printResult(students, studentQuantity, printMedian);
+    printResult(students, studentQuantity, printMedian, true);
 }
