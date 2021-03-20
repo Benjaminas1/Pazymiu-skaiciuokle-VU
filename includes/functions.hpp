@@ -22,9 +22,6 @@ bool optionInput();
 
 void isGrade(int &grade);
 
-
-
-
 void examResult(Students &student);
 
 bool fillWithRandomNumbers(Students &student, int gradeQuant = 10);
@@ -45,7 +42,8 @@ void filterOutput();
 
 void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian);
 
-void readFromFile(vector<StudentsFromFile>& students, bool printMedian);
+void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string fileName);
 
+void runProgramTest();
 
 #endif

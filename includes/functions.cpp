@@ -243,7 +243,6 @@ void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool
             goodStudentsQuant++;
         }
         students.pop_back();
-        if(i%10000==0) cout << i << " " << students.size() << endl;
     }
     //students.erase(students.begin(), students.end());
     //students.clear();
@@ -266,16 +265,13 @@ void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool
     cout << "Geru studentu isvedimo laikas: " << time << endl;
 }
 
-void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian){
+void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string fileName){
     
     string firstLine;
     ifstream in;
 
-    std::cout << "Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): ";
-    printMedian = optionInput();
-
     try{
-        in.open("duomenys/duomenys.txt");
+        in.open(fileName);
         if(in.fail()) throw 1;
         
         getline(in, firstLine);
@@ -324,6 +320,32 @@ void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian){
     catch(int e){
         if(e==1) std::cout << "Error: failas pavadinimu 'duomenys.txt' nerastas" << endl;
         exit(1);
+    }
+}
+
+void runProgramTest(){
+    int size[5] = {1000, 10000, 100000, 1000000, 10000000};
+    string fileName[5];
+    for(int i=0; i<5; i++){
+        fileName[i] = "duomenys/duomenys" + to_string(size[i]) + ".txt";
+    }
+
+    for(int i=0; i<5; i++){
+        cout << "Pradedamas testavimas su " << size[i] << " duomenu" << endl;
+        vector<StudentsFromFile> studentsFF;
+        readFromFile(studentsFF, false, fileName[i]);
+
+        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+        sort(studentsFF.begin(), studentsFF.end(), comepareTwoStudents);
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
+        cout << "Irasu surusiavimo laikas: " << time << endl;
+        
+        //printResult(studentsFF, studentsFF.size(), false, true, "rezultatai/rezultatai.txt");
+        
+        splitStudents(studentsFF, studentsFF.size(), false);
+
+        cout << endl;
     }
 }
 
