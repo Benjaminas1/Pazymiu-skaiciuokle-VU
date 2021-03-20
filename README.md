@@ -49,3 +49,27 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
       Irasu padalinimo laikas: 1.74078
       Blogu studentu isvedimo laikas: 26.8846
       Geru studentu isvedimo laikas: 37.6614
+
+# Releases #
+
+* [v0.1](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.1) : pirminė programos versija.
+
+* [v0.2](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.2) :
+  * Pridėta galimybė nuskaityti duomenis iš failo.
+  * Studentai yra automatiškai išrūšiuojami pagal jų vardus.
+
+* [v0.3](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.3) :
+  * Sukurtas `functions.cpp` failas, kuriame yra sudėtos visos programoje naudojamos funkcijos.
+  * Sukurtas `functions.h` header failas, kuriame yra saugoma studentų struct.
+
+* [v0.4](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.4) :
+  * Sukurta funkcija leidžianti atlikti programos veikimo greičio (spartos) analizę.
+  * Sukurta funkcija leidžianti sugeneruoti atsitiktinius studentų sarašų failus (1'000, 10'000, 100'000, 1'000'000, 10'000'000 įrašų).
+  * Sukurtas studentų rūšiavimas į dvi grupes pagal galutinį balą.
+  * Sugrupuoti studentai yra atitinkamai išvedami į du skirtingus failus.
+
+
+# V0.4 versijos kompiliavimas:
+      g++ -c main.cpp includes/functions.cpp includes/students.cpp
+      g++ -o main main.o functions.o students.o
+
