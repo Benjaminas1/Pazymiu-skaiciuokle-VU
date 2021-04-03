@@ -71,6 +71,7 @@ bool fillWithRandomNumbers(Students &student, int gradeQuant){
         for(int i=0; i<student.homeworkQuant; i++){
             student.grades[i] = dist(mt);
         }
+        student.examGrade = dist(mt);
         return true;
     }
     return false;
@@ -82,14 +83,14 @@ void newStudent(Students &student){
 
     cout << "Ar zinomas namu darbu kiekis? (T/N): ";
     bool confirmation = confirm();
-    
+
     if(confirmation){
         cout << "Iveskite namu darbu kieki: ";
         student.homeworkQuant = numberInput(false);
 
 
         bool filledRandom = fillWithRandomNumbers(student, student.homeworkQuant);
-        
+
         if(!filledRandom){
             cout << "Iveskite namu darbu pazymius: " << endl;
             for(int i=0; i<student.homeworkQuant; i++){
@@ -133,7 +134,7 @@ double calculateFinalGrade(vector<int> grades, int homeworkCount, int exam, bool
         sort(grades.begin(), grades.end());
 
         if(homeworkCount % 2 == 0){
-        
+
             median = 1.00 * (grades[midIndex] + grades[midIndex+1]) / 2;
         }
         else{
@@ -151,24 +152,18 @@ double calculateFinalGrade(vector<int> grades, int homeworkCount, int exam, bool
     }
 }
 
-void printResult(vector<StudentsFromFile> students, int studentQuantity, bool printMedian, bool offstream, string outDir){
+template <class T>
+void printResult(T students, bool printMedian, string outDir){
 
     string finalType = "";
     finalType = printMedian ? "(Med.)" : "(Vid.)";
 
     ofstream out(outDir);
 
-    if(offstream){
-        out << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
-    } 
-    else cout << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
-    
-    for(int i=0; i<studentQuantity; i++){
-        if(offstream){
-            out << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << students[i].finalGrade << endl;
-        }
-        else cout << left << setw(15) << students[i].name << left << setw(15) << students[i].surname << left << setw(15) << setprecision(2) << fixed << students[i].finalGrade << endl;
+    out << left << setw(15) << "Vardas" << left << setw(15) << "Pavarde" << left << setw(0) << "Galutinis " << finalType << endl << "----------------------------------------------" << endl;
 
+    for(auto student : students){
+        out << left << setw(15) << student.name << left << setw(15) << student.surname << left << setw(15) << setprecision(2) << fixed << student.finalGrade << endl;
     }
 }
 
@@ -226,54 +221,16 @@ void generateFiles(){
     cout << "Irasu sugeneravimo laikas: " << time << endl;
 }
 
-void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian){
-    
-    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    
-    vector<StudentsFromFile> badStudents;
-    vector<StudentsFromFile> goodStudents;
-    int goodStudentsQuant = 0, badStudentsQuant = 0;
-    for(int i=studentQuantity-1; i >= 0; i--){
-        if(students[i].finalGrade<5){
-            badStudents.push_back(students[i]);
-            badStudentsQuant++;
-        }
-        else{
-            goodStudents.push_back(students[i]);
-            goodStudentsQuant++;
-        }
-        students.pop_back();
-    }
-    //students.erase(students.begin(), students.end());
-    //students.clear();
+template <class T>
+void readFromFile(T &studentsFF, bool printMedian, string fileName){
 
-    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-    double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
-    cout << "Irasu padalinimo laikas: " << time << endl;
-
-
-    begin = std::chrono::steady_clock::now();
-    printResult(badStudents, badStudentsQuant, printMedian, true, "rezultatai/blogi_studentai.txt");
-    end = std::chrono::steady_clock::now();
-    time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
-    cout << "Blogu studentu isvedimo laikas: " << time << endl;
-
-    begin = std::chrono::steady_clock::now();
-    printResult(goodStudents, goodStudentsQuant, printMedian, true, "rezultatai/geri_studentai.txt");
-    end = std::chrono::steady_clock::now();
-    time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
-    cout << "Geru studentu isvedimo laikas: " << time << endl;
-}
-
-void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string fileName){
-    
     string firstLine;
     ifstream in;
 
     try{
         in.open(fileName);
         if(in.fail()) throw 1;
-        
+
         getline(in, firstLine);
 
         //int homeworkCount = wordCount(firstLine) - 3;
@@ -305,11 +262,11 @@ void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string
             student.finalGrade = calculateFinalGrade(grades, grades.size(), examGrade, printMedian);
 
             studentsFF.push_back(student);
-            
+
             if(in.eof()) break;
         }
         in.close();
-        
+
         studentsFF.pop_back();
 
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
@@ -323,6 +280,95 @@ void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string
     }
 }
 
+void splitStudentsVector(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian){
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
+    sort(students.begin(), students.end(), comepareTwoStudents);
+
+    vector<StudentsFromFile> badStudents;
+    vector<StudentsFromFile> goodStudents;
+    int goodStudentsQuant = 0, badStudentsQuant = 0;
+    for(int i=studentQuantity-1; i >= 0; i--){
+        if(students[i].finalGrade<5){
+            badStudents.push_back(students[i]);
+            badStudentsQuant++;
+        }
+        else{
+            goodStudents.push_back(students[i]);
+            goodStudentsQuant++;
+        }
+        students.pop_back();
+    }
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
+    cout << "Irasu surusiavimo laikas: " << time << endl;
+
+    printResult(badStudents, printMedian, "rezultatai/blogi_studentai.txt");
+
+    printResult(goodStudents, printMedian, "rezultatai/geri_studentai.txt");
+}
+
+void splitStudentsList(list<StudentsFromFile> &students, int studentQuantity, bool printMedian){
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
+    students.sort(comepareTwoStudents);
+
+    list<StudentsFromFile> badStudents;
+    list<StudentsFromFile> goodStudents;
+    int goodStudentsQuant = 0, badStudentsQuant = 0;
+    for(auto student : students){
+        if(student.finalGrade<5){
+            badStudents.push_back(student);
+            badStudentsQuant++;
+        }
+        else{
+            goodStudents.push_back(student);
+            goodStudentsQuant++;
+        }
+    }
+    students.clear();
+
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
+    cout << "Irasu surusiavimo laikas: " << time << endl;
+
+    printResult(badStudents, printMedian, "rezultatai/blogi_studentai.txt");
+
+    printResult(goodStudents, printMedian, "rezultatai/geri_studentai.txt");
+}
+
+void splitStudentsDeque(deque<StudentsFromFile> &students, int studentQuantity, bool printMedian){
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+
+
+    sort(students.begin(), students.end(), comepareTwoStudents);
+
+    deque<StudentsFromFile> badStudents;
+    deque<StudentsFromFile> goodStudents;
+    int goodStudentsQuant = 0, badStudentsQuant = 0;
+    for(int i=studentQuantity-1; i >= 0; i--){
+        if(students[i].finalGrade<5){
+            badStudents.push_back(students[i]);
+            badStudentsQuant++;
+        }
+        else{
+            goodStudents.push_back(students[i]);
+            goodStudentsQuant++;
+        }
+        students.pop_back();
+    }
+
+    std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+    double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
+    cout << "Irasu surusiavimo laikas: " << time << endl;
+    
+    printResult(badStudents, printMedian, "rezultatai/blogi_studentai.txt");
+
+    printResult(goodStudents, printMedian, "rezultatai/geri_studentai.txt");
+}
+
 void runProgramTest(){
     int size[5] = {1000, 10000, 100000, 1000000, 10000000};
     string fileName[5];
@@ -331,28 +377,29 @@ void runProgramTest(){
     }
 
     for(int i=0; i<5; i++){
-        cout << "Pradedamas testavimas su " << size[i] << " duomenu" << endl;
-        vector<StudentsFromFile> studentsFF;
-        readFromFile(studentsFF, false, fileName[i]);
+        cout << "--------------------------------------------------" << endl;
+        cout << "Pradedamas testavimas su " << size[i] << " duomenu:" << endl;
+        cout << "- Naudojant vector: " << endl;
+        vector<StudentsFromFile> studentsVector;
+        readFromFile(studentsVector, false, fileName[i]);
+        splitStudentsVector(studentsVector, studentsVector.size(), false);
 
-        std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-        sort(studentsFF.begin(), studentsFF.end(), comepareTwoStudents);
-        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-        double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
-        cout << "Irasu surusiavimo laikas: " << time << endl;
-        
-        //printResult(studentsFF, studentsFF.size(), false, true, "rezultatai/rezultatai.txt");
-        
-        splitStudents(studentsFF, studentsFF.size(), false);
+        cout << "- Naudojant list: " << endl;
+        list<StudentsFromFile> studentsList;
+        readFromFile(studentsList, false, fileName[i]);
+        splitStudentsList(studentsList, studentsList.size(), false);
 
-        cout << endl;
+        cout << "- Naudojant deque: " << endl;
+        deque<StudentsFromFile> studentsDeque;
+        readFromFile(studentsDeque, false, fileName[i]);
+        splitStudentsDeque(studentsDeque, studentsDeque.size(), false);
     }
 }
 
 // void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian){
-    
+
 //     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
-    
+
 //     vector<StudentsFromFile> badStudents;
 //     vector<StudentsFromFile> goodStudents;
 //     int goodStudentsQuant = 0, badStudentsQuant = 0;

@@ -22,27 +22,30 @@ int main(){
     }
 
     //Students student;
-    std::cout << "Ar norite kad duomenys butu nuskaityti is failo? (T/N): ";
+    std::cout << "Ar norifte kad duomenys butu nuskaityti is failo? (T/N): ";
     if(confirm()){
         std::cout << "Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): ";
         printMedian = optionInput();
 
         readFromFile(studentsFF, printMedian, "duomenys/duomenys.txt");
-        cout << studentsFF.size() << endl;
     }
     else{
         Students student;
         StudentsFromFile tempStudent;
-        newStudent(student);
 
         std::cout << "Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): ";
         printMedian = optionInput();
+
+        newStudent(student);
+
+        
 
         student.finalGrade = calculateFinalGrade(student.grades, student.homeworkQuant, student.examGrade, printMedian);
 
         tempStudent.name = student.name;
         tempStudent.surname = student.surname;
         tempStudent.finalGrade = student.finalGrade;
+        cout << "final grade:  " << tempStudent.finalGrade << endl;
         studentsFF.push_back(tempStudent);
 
         bool confirmation = true;
@@ -74,9 +77,9 @@ int main(){
     double time = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() /1000000.0;
     cout << "Irasu surusiavimo laikas: " << time << endl;
     
-    printResult(studentsFF, studentsFF.size(), printMedian, true, "rezultatai/rezultatai.txt");
+    printResult(studentsFF, printMedian, "rezultatai/rezultatai.txt");
     
-    splitStudents(studentsFF, studentsFF.size(), printMedian);
+    splitStudentsVector(studentsFF, studentsFF.size(), printMedian);
 
     
 }

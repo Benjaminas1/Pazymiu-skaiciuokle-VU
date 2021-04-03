@@ -10,6 +10,8 @@
 #include <string>
 #include <cstring>
 #include <sstream>
+#include <list>
+#include <deque>
 
 using namespace std;
 
@@ -30,7 +32,8 @@ void newStudent(Students &student);
 
 double calculateFinalGrade(vector<int> grades, int homeworkCount, int exam, bool printMedian);
 
-void printResult(vector<StudentsFromFile> students, int studentQuantity, bool printMedian, bool offstream, string outDir = "rezultatai/rezultatai.txt");
+template <class T>
+void printResult(T students, bool printMedian, string outDir = "rezultatai/rezultatai.txt");
 
 int wordCount(string str);
 
@@ -40,9 +43,12 @@ void generateFiles();
 
 void filterOutput();
 
-void splitStudents(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian);
+template <class T>
+void readFromFile(T &studentsFF, bool printMedian, string fileName);
 
-void readFromFile(vector<StudentsFromFile>& studentsFF, bool printMedian, string fileName);
+void splitStudentsVector(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian);
+
+void splitStudentsList(list<StudentsFromFile> &students, int studentQuantity, bool printMedian);
 
 void runProgramTest();
 
