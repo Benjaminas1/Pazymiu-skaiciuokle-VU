@@ -89,8 +89,11 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
   * Sukurtas studentų rūšiavimas į dvi grupes pagal galutinį balą.
   * Sugrupuoti studentai yra atitinkamai išvedami į du skirtingus failus.
 
+* [v0.5](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.5) :
+  * Testavimas atliekamas naudojant tris skirtingus konteinerius: vector, list, deque.
 
-# V0.4 versijos kompiliavimas:
+
+# V0.5 versijos kompiliavimas:
       g++ -c main.cpp includes/functions.cpp includes/students.cpp
       g++ -o main main.o functions.o students.o
 
