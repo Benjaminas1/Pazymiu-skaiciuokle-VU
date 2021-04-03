@@ -12,6 +12,8 @@ Taip pat yra galimybe, kad pažymiai būtų sugeneruojami atsitiktiniu būdu
 Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arba medianą.
 
 # Programos testavimas
+
+Testavimas buvo atliktas naudojant 238GB Hitachi SATA SSD, 8.00GB Dual-Channel RAM 2133MHz (Unknown brand), Intel i3 7100U @ 2.40GHz
  
     Ar norite sugeneruoti studentu sarasu failus? (T/N): N
     Ar norite atlikti testavima? (T/N): T
