@@ -13,42 +13,63 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
 
 # Programos testavimas
  
-      Ar norite sugeneruoti studentu sarasu failus? (T/N): N
-      Ar norite atlikti testavima? (T/N): T
-      Pradedamas testavimas su 1000 duomenu
-      Irasu nuskaitymo laikas: 0.009288
-      Irasu surusiavimo laikas: 0.003843
-      Irasu padalinimo laikas: 0.000323
-      Blogu studentu isvedimo laikas: 0.032874
-      Geru studentu isvedimo laikas: 0.058284
-
-      Pradedamas testavimas su 10000 duomenu
-      Irasu nuskaitymo laikas: 0.066168
-      Irasu surusiavimo laikas: 0.036811
-      Irasu padalinimo laikas: 0.003388
-      Blogu studentu isvedimo laikas: 0.056377
-      Geru studentu isvedimo laikas: 0.079731
-
-      Pradedamas testavimas su 100000 duomenu
-      Irasu nuskaitymo laikas: 0.684028
-      Irasu surusiavimo laikas: 0.442374
-      Irasu padalinimo laikas: 0.019369
-      Blogu studentu isvedimo laikas: 0.291874
-      Geru studentu isvedimo laikas: 0.409058
-
-      Pradedamas testavimas su 1000000 duomenu
-      Irasu nuskaitymo laikas: 7.44474
-      Irasu surusiavimo laikas: 5.52554
-      Irasu padalinimo laikas: 0.201942
-      Blogu studentu isvedimo laikas: 2.71565
-      Geru studentu isvedimo laikas: 4.47632
-
-      Pradedamas testavimas su 10000000 duomenu
-      Irasu nuskaitymo laikas: 61.1624
-      Irasu surusiavimo laikas: 63.3781
-      Irasu padalinimo laikas: 1.74078
-      Blogu studentu isvedimo laikas: 26.8846
-      Geru studentu isvedimo laikas: 37.6614
+    Ar norite sugeneruoti studentu sarasu failus? (T/N): N
+    Ar norite atlikti testavima? (T/N): T
+    --------------------------------------------------
+    Pradedamas testavimas su 1000 duomenu:
+    - Naudojant vector:
+    Irasu nuskaitymo laikas: 0.009975
+    Irasu surusiavimo laikas: 0.003681
+    - Naudojant list: 
+    Irasu nuskaitymo laikas: 0.009432
+    Irasu surusiavimo laikas: 0.001995
+    - Naudojant deque: 
+    Irasu nuskaitymo laikas: 0.01228
+    Irasu surusiavimo laikas: 0.008226
+    --------------------------------------------------
+    Pradedamas testavimas su 10000 duomenu:
+    - Naudojant vector:
+    Irasu nuskaitymo laikas: 0.080543
+    Irasu surusiavimo laikas: 0.053663
+    - Naudojant list: 
+    Irasu nuskaitymo laikas: 0.068606
+    Irasu surusiavimo laikas: 0.014319
+    - Naudojant deque: 
+    Irasu nuskaitymo laikas: 0.064062
+    Irasu surusiavimo laikas: 0.06252
+    --------------------------------------------------
+    Pradedamas testavimas su 100000 duomenu:
+    - Naudojant vector:
+    Irasu nuskaitymo laikas: 0.707505
+    Irasu surusiavimo laikas: 0.449731
+    - Naudojant list: 
+    Irasu nuskaitymo laikas: 0.658147
+    Irasu surusiavimo laikas: 0.219713
+    - Naudojant deque: 
+    Irasu nuskaitymo laikas: 0.67883
+    Irasu surusiavimo laikas: 0.876861
+    --------------------------------------------------
+    Pradedamas testavimas su 1000000 duomenu:
+    - Naudojant vector:
+    Irasu nuskaitymo laikas: 6.42586
+    Irasu surusiavimo laikas: 5.62348
+    - Naudojant list: 
+    Irasu nuskaitymo laikas: 7.36148
+    Irasu surusiavimo laikas: 2.4272
+    - Naudojant deque: 
+    Irasu nuskaitymo laikas: 7.37906
+    Irasu surusiavimo laikas: 11.8036
+    --------------------------------------------------
+    Pradedamas testavimas su 10000000 duomenu:
+    - Naudojant vector:
+    Irasu nuskaitymo laikas: 63.6472
+    Irasu surusiavimo laikas: 67.5484
+    - Naudojant list: 
+    Irasu nuskaitymo laikas: 63.3495
+    Irasu surusiavimo laikas: 21.0415
+    - Naudojant deque: 
+    Irasu nuskaitymo laikas: 60.88
+    Irasu surusiavimo laikas: 121.129
 
 # Releases #
 
