@@ -15,63 +15,31 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
 
 Testavimas buvo atliktas naudojant 238GB Hitachi SATA SSD, 8.00GB Dual-Channel RAM 2133MHz (Unknown brand), Intel i3 7100U @ 2.40GHz
  
-    Ar norite sugeneruoti studentu sarasu failus? (T/N): N
-    Ar norite atlikti testavima? (T/N): T
-    --------------------------------------------------
-    Pradedamas testavimas su 1000 duomenu:
-    - Naudojant vector:
-    Irasu nuskaitymo laikas: 0.009975
-    Irasu surusiavimo laikas: 0.003681
-    - Naudojant list: 
-    Irasu nuskaitymo laikas: 0.009432
-    Irasu surusiavimo laikas: 0.001995
-    - Naudojant deque: 
-    Irasu nuskaitymo laikas: 0.01228
-    Irasu surusiavimo laikas: 0.008226
-    --------------------------------------------------
-    Pradedamas testavimas su 10000 duomenu:
-    - Naudojant vector:
-    Irasu nuskaitymo laikas: 0.080543
-    Irasu surusiavimo laikas: 0.053663
-    - Naudojant list: 
-    Irasu nuskaitymo laikas: 0.068606
-    Irasu surusiavimo laikas: 0.014319
-    - Naudojant deque: 
-    Irasu nuskaitymo laikas: 0.064062
-    Irasu surusiavimo laikas: 0.06252
-    --------------------------------------------------
-    Pradedamas testavimas su 100000 duomenu:
-    - Naudojant vector:
-    Irasu nuskaitymo laikas: 0.707505
-    Irasu surusiavimo laikas: 0.449731
-    - Naudojant list: 
-    Irasu nuskaitymo laikas: 0.658147
-    Irasu surusiavimo laikas: 0.219713
-    - Naudojant deque: 
-    Irasu nuskaitymo laikas: 0.67883
-    Irasu surusiavimo laikas: 0.876861
-    --------------------------------------------------
-    Pradedamas testavimas su 1000000 duomenu:
-    - Naudojant vector:
-    Irasu nuskaitymo laikas: 6.42586
-    Irasu surusiavimo laikas: 5.62348
-    - Naudojant list: 
-    Irasu nuskaitymo laikas: 7.36148
-    Irasu surusiavimo laikas: 2.4272
-    - Naudojant deque: 
-    Irasu nuskaitymo laikas: 7.37906
-    Irasu surusiavimo laikas: 11.8036
-    --------------------------------------------------
-    Pradedamas testavimas su 10000000 duomenu:
-    - Naudojant vector:
-    Irasu nuskaitymo laikas: 63.6472
-    Irasu surusiavimo laikas: 67.5484
-    - Naudojant list: 
-    Irasu nuskaitymo laikas: 63.3495
-    Irasu surusiavimo laikas: 21.0415
-    - Naudojant deque: 
-    Irasu nuskaitymo laikas: 60.88
-    Irasu surusiavimo laikas: 121.129
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 # Releases #
 
@@ -94,8 +62,18 @@ Testavimas buvo atliktas naudojant 238GB Hitachi SATA SSD, 8.00GB Dual-Channel R
 * [v0.5](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v0.5) :
   * Testavimas atliekamas naudojant tris skirtingus konteinerius: vector, list, deque.
 
+* [v1.0](https://github.com/Benjaminas1/Pazymiu-skaiciuokle-VU/releases/tag/v1.0) :
+  * Testavime implementuota galimybė pasirinkti tarp 3 skirtingų duomenų rūšiavimo strategijų.
 
-# V0.5 versijos kompiliavimas:
-      g++ -c main.cpp includes/functions.cpp includes/students.cpp
-      g++ -o main main.o functions.o students.o
+
+# V1.0 versijos kompiliavimas:
+Windows sistemai:
+
+    g++ -c main.cpp includes/functions.cpp includes/students.cpp
+    g++ -o main main.o functions.o students.o
+      
+Linux sistemai:
+
+    make
+    ./main
 
