@@ -12,11 +12,14 @@
 #include <sstream>
 #include <list>
 #include <deque>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 
 bool confirm();
+
+int chooseStrategy();
 
 int numberInput(bool enterToEnd = false);
 
@@ -46,10 +49,9 @@ void filterOutput();
 template <class T>
 void readFromFile(T &studentsFF, bool printMedian, string fileName);
 
-void splitStudentsVector(vector<StudentsFromFile> &students, int studentQuantity, bool printMedian);
+template <class T>
+void splitStudents(T &students, int studentQuantity, bool printMedian);
 
-void splitStudentsList(list<StudentsFromFile> &students, int studentQuantity, bool printMedian);
-
-void runProgramTest();
+void runProgramTest(int strategy);
 
 #endif

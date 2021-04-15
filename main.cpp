@@ -17,12 +17,12 @@ int main(){
 
     std::cout << "Ar norite atlikti testavima? (T/N): ";
     if(confirm()){
-        runProgramTest();
+        runProgramTest(chooseStrategy());
         return 0;
     }
 
     //Students student;
-    std::cout << "Ar norifte kad duomenys butu nuskaityti is failo? (T/N): ";
+    std::cout << "Ar norite kad duomenys butu nuskaityti is failo? (T/N): ";
     if(confirm()){
         std::cout << "Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): ";
         printMedian = optionInput();
@@ -79,7 +79,7 @@ int main(){
     
     printResult(studentsFF, printMedian, "rezultatai/rezultatai.txt");
     
-    splitStudentsVector(studentsFF, studentsFF.size(), printMedian);
+    splitStudents(studentsFF, studentsFF.size(), printMedian);
 
     
 }
