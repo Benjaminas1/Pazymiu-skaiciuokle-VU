@@ -29,7 +29,7 @@ Sugeneruojami 5 duomenų failai iš 6 atsitiktinai sugeneruotų namų darbų ir 
 
 Testuojant galima pasirinkti tarp 3 duomenų rūšiavimo strategijų:
 
-**1 strategija**
+* **1 strategija**
 
 Studentų konteineris skaidomas į kitus du konteinerius - "blogi_studentai" ir "geri_studentai". Tokiu būdu tas pats studentas yra dvejuose konteineriuose: bendrame "studentai" ir viename iš suskaidytų.
 
@@ -39,13 +39,25 @@ Studentų konteineris skaidomas į kitus du konteinerius - "blogi_studentai" ir 
 | list                           | 0.050398  | 0.243815 | 1.84089 | 19.9467   | 163.67     |
 | deque                          | 0.041801  | 0.236337 | 2.5052  | 22.5667   | 257.109    |
 
-**2 strategija**
+* **2 strategija**
 
 Bendro studentų konteinerio rūšiavimas atliekamas panaudojant tik vieną naują konteinerį - "blogi_studenta". Tokiu būdu, jei studentas yra blogas, jis  įkeliamas į naująjį "blogi_studentai" konteinerį ir ištrinamas iš bendro "studentai" konteinerio.
 
-**3 strategija**
+| Konteineris                    | 1.000     | 10.000   | 100.000 |
+| :----------------------------- | :-------- | :------  | :------ |
+| vector                         | 0.038895  | 0.726444 | 55.9269 |
+| list                           | 0.028612  | 0.20331  | 1.85844 |
+| deque                          | 0.056739  | 0.776314 | 56.8899 |
+
+* **3 strategija**
 
 Pagrindinis "studentai" konteineris yra surūšiuojamas mažėjimo tvarka, naudojant std::find_if ir std::copy algoritmus surandami visi blogi studentai ir perkeliami į naujai sukurta "blogi_studentai" konteinerį, galiausiai pagrindinio "studentai" konteinerio dydis sumazinamas, kad jame liktų tik geri studentai.
+
+| Konteineris                    | 1.000     | 10.000   | 100.000 | 1.000.000 | 10.000.000 |
+| :----------------------------- | :-------- | :------  | :------ | :-------- | :--------- |
+| vector                         | 0.034552  | 0.284003 | 2.12223 | 19.4143   | 224.023    |
+| list                           | 0.046588  | 0.212908 | 2.07622 | 20.2357   | 195.663    |
+| deque                          | 0.043405  | 0.24667  | 2.74611 | 24.5702   | 285.267    |
 
 # Duomenų įvedimas rankiniu būdu
 Pasirinkus duomenų įvedimą rankiniu būdu reikia įvesti šiuos duomenis:
