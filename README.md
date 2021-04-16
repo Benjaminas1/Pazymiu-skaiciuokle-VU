@@ -2,7 +2,7 @@
 Programa skirta apskaičiuoti vieno ar kelių moksleivių pažymių galutinį balą.
 
 # Programos veikimas
-Atsidarius programą galima pasirinkti tarp skirtingų opcijų:
+Atsidarius programą galima pasirinkti tarp skirtingų veiksmų:
 * Sugeneruoti duomenų failus
 * Atlikti testavimą
 * Nuskaityti duomenis iš failo
@@ -59,6 +59,15 @@ Pagrindinis "studentai" konteineris yra surūšiuojamas mažėjimo tvarka, naudo
 | list                           | 0.046588  | 0.212908 | 2.07622 | 20.2357   | 195.663    |
 | deque                          | 0.043405  | 0.24667  | 2.74611 | 24.5702   | 285.267    |
 
+# Duomenų nuskaitymas iš failo
+Pasirinkus nuskaitymą iš duomenų failo, nuskaitomas "duomenys.txt" failas esantis "duomenys" aplanke, jeigu toks failas nerandamas, išmetama klaida. Programa atlikus veiksmus išveda kiek laiko truko įrašų nuskaitymas ir surūšiavimas, o rezultatai išvedami "rezultatai" aplanke esančiame "rezultatai.txt" faile.
+
+     Ar norite kad duomenys butu nuskaityti is failo? (T/N): T
+     Pasirinkite atspausdinti galutinio balo Vidurki(1) arba Mediana(2): 2
+     Irasu nuskaitymo laikas: 0.007504
+     Irasu surusiavimo laikas: 0.003517
+
+
 # Duomenų įvedimas rankiniu būdu
 Pasirinkus duomenų įvedimą rankiniu būdu reikia įvesti šiuos duomenis:
 * Studento vardas pavardė
@@ -100,12 +109,6 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
      Benjaminas     Racas          7.71
      Vytautas       Miltinis       8.80
 
-    
-    
-
-    
-    
-    
     
 
 # Releases #
