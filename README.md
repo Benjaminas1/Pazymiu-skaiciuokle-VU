@@ -33,6 +33,12 @@ Testuojant galima pasirinkti tarp 3 duomenų rūšiavimo strategijų:
 
 Studentų konteineris skaidomas į kitus du konteinerius - "blogi_studentai" ir "geri_studentai". Tokiu būdu tas pats studentas yra dvejuose konteineriuose: bendrame "studentai" ir viename iš suskaidytų.
 
+| Konteineris                    | 1.000     | 10.000   | 100.000 | 1.000.000 | 10.000.000 |
+| :----------------------------- | :-------- | :------  | :------ | :-------- | :--------- |
+| vector                         | 0.03773   | 0.362848 | 2.05499 | 21.9079   | 212.784    |
+| list                           | 0.050398  | 0.243815 | 1.84089 | 19.9467   | 163.67     |
+| deque                          | 0.041801  | 0.236337 | 2.5052  | 22.5667   | 257.109    |
+
 **2 strategija**
 
 Bendro studentų konteinerio rūšiavimas atliekamas panaudojant tik vieną naują konteinerį - "blogi_studenta". Tokiu būdu, jei studentas yra blogas, jis  įkeliamas į naująjį "blogi_studentai" konteinerį ir ištrinamas iš bendro "studentai" konteinerio.
