@@ -25,9 +25,24 @@ Sugeneruojami 5 duomenų failai iš 6 atsitiktinai sugeneruotų namų darbų ir 
      Vardas6             Pavarde6            7              6              1              8              6              6              1      
 
 # Testavimas
+ > (Visi testavimai buvo atlikti naudojant 238GB Hitachi SATA SSD, 8.00GB Dual-Channel RAM 2133MHz (Unknown brand), Intel i3 7100U @ 2.40GHz)
 
+Testuojant galima pasirinkti tarp 3 duomenų rūšiavimo strategijų:
+
+**1 strategija**
+
+Studentų konteineris skaidomas į kitus du konteinerius - "blogi_studentai" ir "geri_studentai". Tokiu būdu tas pats studentas yra dvejuose konteineriuose: bendrame "studentai" ir viename iš suskaidytų.
+
+**2 strategija**
+
+Bendro studentų konteinerio rūšiavimas atliekamas panaudojant tik vieną naują konteinerį - "blogi_studenta". Tokiu būdu, jei studentas yra blogas, jis  įkeliamas į naująjį "blogi_studentai" konteinerį ir ištrinamas iš bendro "studentai" konteinerio.
+
+**3 strategija**
+
+Pagrindinis "studentai" konteineris yra surūšiuojamas mažėjimo tvarka, naudojant std::find_if ir std::copy algoritmus surandami visi blogi studentai ir perkeliami į naujai sukurta "blogi_studentai" konteinerį, galiausiai pagrindinio "studentai" konteinerio dydis sumazinamas, kad jame liktų tik geri studentai.
 
 # Duomenų įvedimas rankiniu būdu
+Pasirinkus duomenų įvedimą rankiniu būdu reikia įvesti šiuos duomenis:
 * Studento vardas pavardė
 * Namų darbų pažymiai
 * Egzamino rezultatas
@@ -67,32 +82,9 @@ Galutiniam balui atspausdinti galima pasirinkti naudoti visų balų vidurkį arb
      Benjaminas     Racas          7.71
      Vytautas       Miltinis       8.80
 
+    
+    
 
-# Programos testavimas
-
-Testavimas buvo atliktas naudojant 238GB Hitachi SATA SSD, 8.00GB Dual-Channel RAM 2133MHz (Unknown brand), Intel i3 7100U @ 2.40GHz
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
